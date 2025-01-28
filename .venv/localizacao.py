@@ -1,58 +1,58 @@
-from PyQt5.QtWidgets import QLabel, QBoxLayout, QVBoxLayout, QHBoxLayout,QApplication, QLineEdit, QPushButton, QWidget, QMessageBox
+from PyQt5.QtWidgets import QLabel, QBoxLayout, QVBoxLayout, QHBoxLayout,QApplication, QLineEdit, QPushButton, QWidget
 import sys
 
-class Patrimonio (QWidget):
+class localizacao (QWidget):
     def __init__(self):
         super().__init__()
 
         self.setGeometry(350,350,1000,300)
         
-        self.setWindowTitle("Patrimonio Material")
+        self.setWindowTitle("Localização")
 
         ##LAYOUT VERTICAL!
         self.layout_v = QVBoxLayout ()
 
-        self.label_equipamento = QLabel ("Qual é o equipamento?:")
+        self.label_equipamento = QLabel ("ID:")
         self.label_equipamento.setStyleSheet("QLabel{font-size:18pt}")
 
         self.edit_equipamento = QLineEdit()
         self.edit_equipamento.setStyleSheet("QLineEdit{font-size:12pt}")
 
-        self.label_ID = QLabel ("Identificador ou ID: ")
+        self.label_ID = QLabel ("Empresa: ")
         self.label_ID.setStyleSheet("QLabel{font-size:18pt}")
 
         self.edit_ID = QLineEdit ()
         self.edit_ID.setStyleSheet("QLineEdit{font-size:12pt}")
 
-        self.label_nome = QLabel ("Nome ou Marca do equipamento")
+        self.label_nome = QLabel ("Logradouro")
         self.label_nome.setStyleSheet("QLabel{font-size:18pt}")
 
         self.edit_nome = QLineEdit ()
         self.edit_nome.setStyleSheet("QLineEdit{font-size:12pt}")
 
-        self.label_Local = QLabel ("Localização")
+        self.label_Local = QLabel ("Número")
         self.label_Local.setStyleSheet("QLabel{font-size:18pt}")
 
         self.edit_local = QLineEdit()
         self.edit_local.setStyleSheet("QLineEdit{font-size:12pt}")
 
-        self.label_Aquisicao = QLabel ("Quando foi adquirido")
+        self.label_Aquisicao = QLabel ("Prédio")
         self.label_Aquisicao.setStyleSheet("QLabel{font-size:18pt}")
 
         self.edit_aquisicao = QLineEdit ()
         self.edit_aquisicao.setStyleSheet("QLineEdit{font-size:12pt}")
 
-        self.label_fabricacao = QLabel ("Quando foi fabricado:")
+        self.label_fabricacao = QLabel ("Andar")
         self.label_fabricacao.setStyleSheet("QLabel{font-size:18pt}")
 
         self.edit_fabricacao = QLineEdit()
         self.edit_fabricacao.setStyleSheet("QLineEdit{font-size:12pt}")
         
-        self.label_descricao = QLabel("Descrição")
+        self.label_descricao = QLabel("Sala")
         self.label_descricao.setStyleSheet("QLabel{font-size:18pt}")
 
         self.edit_descricao = QLineEdit ()
-        self.edit_descricao.setStyleSheet("QLineEdit{font-size:25pt}")
+        self.edit_descricao.setStyleSheet("QLineEdit{font-size:18pt}")
 
 
 
@@ -90,23 +90,21 @@ class Patrimonio (QWidget):
         self.setLayout(self.layout_v)
     
     def registrar(self):
-        if (self.edit_ID.text()=="" or self.edit_nome.text()=="" or self.edit_local.text()=="" or self.edit_descricao.text()==""):QMessageBox.critical(self,"ERRO","PREENCHA TUDO")
-        else:
-            arquivo = open ("Patrimonio.txt","+a", encoding="utf8")
-            arquivo.write(f"Equipamento: {self.edit_equipamento.text()}\n")
-            arquivo.write(f"ID: {self.edit_ID.text()}\n")
-            arquivo.write(f"Nome/Marca: {self.edit_nome.text()}\n")
-            arquivo.write(f"Localizacao: {self.edit_local.text()}\n")
-            arquivo.write(f"Fabricacao: {self.edit_fabricacao.text()}\n")
-            arquivo.write(f"Aquisicao: {self.edit_aquisicao.text()}\n")
-            
-            arquivo.write(f"Descricao: {self.edit_descricao.text()}\n")
+        arquivo = open ("localizacao.txt","+a", encoding="utf8")
+        arquivo.write(f"ID: {self.edit_equipamento.text()}\n")
+        arquivo.write(f"Empresa: {self.edit_ID.text()}\n")
+        arquivo.write(f"Logradouro: {self.edit_nome.text()}\n")
+        arquivo.write(f"Número: {self.edit_local.text()}\n")
+        arquivo.write(f"Prédio: {self.edit_fabricacao.text()}\n")
+        arquivo.write(f"Andar: {self.edit_aquisicao.text()}\n")
         
-            arquivo.write("_______________________________\n")
-            arquivo.close ()
-            QMessageBox.information(self,"SALVEEE","TA SALVO RLX")
+        arquivo.write(f"Sala: {self.edit_descricao.text()}\n")
+       
+        arquivo.write("_______________________________\n")
+        arquivo.close ()
+
 #app = QApplication(sys.argv)
 
-#tela = Patrimonio ()
+#tela = localizacao ()
 #tela.show()
 #app.exec()
