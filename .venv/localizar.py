@@ -65,6 +65,7 @@ class localiza (QWidget):
         self.layout_v.addWidget(self.edit_equipamento)
         self.btnbuscar = QPushButton ("Localizar")
         self.layout_v.addWidget(self.btnbuscar)
+        self.btnbuscar.clicked.connect(self.localizar)
         
         self.layout_v.addWidget(self.label_ID)
         self.layout_v.addWidget(self.edit_ID)
