@@ -1,7 +1,8 @@
 from PyQt5.QtWidgets import QLabel, QBoxLayout, QVBoxLayout, QHBoxLayout,QApplication, QLineEdit, QPushButton, QWidget, QMessageBox
 import sys
+import csv
 
-class Patrimonio (QWidget):
+class localiza (QWidget):
     def __init__(self):
         super().__init__()
 
@@ -57,14 +58,13 @@ class Patrimonio (QWidget):
 
 
         ##BUTAO
-        self.button = QPushButton("Registrar")
-        self.button.setStyleSheet("QPushButton{Background-color:red;color:white;font-size:12pt;font-weight:bold}")
-
-        self.button.clicked.connect(self.registrar)
+        
 
         #Adição do layout vertical
         self.layout_v.addWidget(self.label_equipamento)
         self.layout_v.addWidget(self.edit_equipamento)
+        self.btnbuscar = QPushButton ("Localizar")
+        self.layout_v.addWidget(self.btnbuscar)
         
         self.layout_v.addWidget(self.label_ID)
         self.layout_v.addWidget(self.edit_ID)
@@ -84,27 +84,18 @@ class Patrimonio (QWidget):
         self.layout_v.addWidget(self.label_descricao)
         self.layout_v.addWidget(self.edit_descricao)
 
-        self.layout_v.addWidget(self.button)
+       
 
         ##!!
         self.setLayout(self.layout_v)
-    
-    def registrar(self):
-        if (self.edit_ID.text()=="" or self.edit_nome.text()=="" or self.edit_local.text()=="" or self.edit_descricao.text()==""):QMessageBox.critical(self,"ERRO","PREENCHA TUDO")
-        else:
-            arquivo = open ("Patrimonio.csv","+a", encoding="utf8")
-            arquivo.write(f"{self.edit_equipamento.text()};")
-            arquivo.write(f"{self.edit_ID.text()};")
-            arquivo.write(f"{self.edit_nome.text()};")
-            arquivo.write(f"{self.edit_local.text()};")
-            arquivo.write(f"{self.edit_fabricacao.text()};")
-            arquivo.write(f"{self.edit_aquisicao.text()};")
-            
-            arquivo.write(f"{self.edit_descricao.text()};\n")
-        
-            
-            arquivo.close ()
-            QMessageBox.information(self,"SALVEEE","TA SALVO RLX")
+    def localizar (self):
+        arquivo = open("","r",encoding="utf8")
+        linhas = csv.reader(arquivo)
+        for i in linhas:
+            lin = str(i).replace("['","").replace("]'","")
+            if(lin[0]==self.edit_nome.text()):
+               self.edit_ID.setText(lin[1])
+   
 #app = QApplication(sys.argv)
 
 #tela = Patrimonio ()

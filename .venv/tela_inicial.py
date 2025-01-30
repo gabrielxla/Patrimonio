@@ -3,10 +3,12 @@ import sys
 from Patrimonio import Patrimonio
 from localizacao import localizacao
 from atualizacao import atualizacao
+from localizar import localiza
 class telainicial (QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Gerenciar")
+        
         self.setGeometry(300,200,200,150)
         self.layout_v = QVBoxLayout()
 
@@ -14,15 +16,18 @@ class telainicial (QWidget):
         self.button = QPushButton ("Abrir cadastro")
         self.button2 = QPushButton("Abrir localização")
         self.button3 = QPushButton("Abrir Atualização")
+        self.button4 = QPushButton("Abrir localiza")
 
         self.layout_v.addWidget(self.label_titulo)
         self.layout_v.addWidget(self.button)
         self.layout_v.addWidget(self.button2)
         self.layout_v.addWidget(self.button3)
+        self.layout_v.addWidget(self.button4)
 
         self.button.clicked.connect(self.abrir_cadastro)
         self.button2.clicked.connect(self.abrir_localizacao)
         self.button3.clicked.connect(self.abrir_atualizacao)
+        self.button4.clicked.connect(self.abrir_localiza)
 
         self.setLayout(self.layout_v)
     def abrir_localizacao(self):
@@ -35,7 +40,10 @@ class telainicial (QWidget):
     def abrir_atualizacao(self):
         self.atua = atualizacao()
         self.atua.show()
-        
+    def abrir_localiza(self):
+        self.loc = localiza()
+        self.loc.show()
+
 app = QApplication(sys.argv)
 tela = telainicial ()
 tela.show ()
